@@ -1,0 +1,15 @@
+# Gradle
+.gradle/
+.gogradle
+build/
+bin/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.springBeans
+
+# IDEA
+.idea/
+/out/
