@@ -2,8 +2,16 @@
 
 This is a bridge from sendmail to msmtp. The goal is to support all the different ways to provide arguments and translate them to msmtp.
 
-# Local Usage
+# Configuration of "from"
 
+The "from" email can be defined in multiple places. The latest defined will be used.
+
+- *TODO* In the */etc/sendmail-to-msmtp.json* configuration file
+- *TODO* In the "-r" argument
+- *TODO* In the "-f" argument
+- *TODO* In the "From: " header
+
+# Local Usage
 
 ## Compile
 
