@@ -5,14 +5,16 @@ Arguments:
 https://linux.die.net/man/8/sendmail.sendmail
 
 
--t
+-t -> -t
 	Read message for recipients. To:, Cc:, and Bcc: lines will be scanned for recipient addresses. The Bcc: line will be deleted before transmission.
 	
 -i 
 	Ignore dots alone on lines by themselves in incoming messages. This should be set if you are reading data from a file. 
 
--r or -f
+-r or -f -> -f
   Sets the name of the ''from'' person (i.e., the envelope sender of the mail). This address may also be used in the From: header if that header is missing during initial submission. The envelope sender address is used as the recipient for delivery status notifications and may also appear in a Return-Path: header. -f should only be used by ''trusted'' users (normally root, daemon, and network) or if the person you are trying to become is the same as the person you are. Otherwise, an X-Authentication-Warning header will be added to the message.
   
 -F
     Set the full name of the sender.
+
+addresses ->  -- addresses
