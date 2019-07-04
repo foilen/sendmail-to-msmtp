@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"math/rand"
 	"os"
 	"strconv"
@@ -9,7 +8,7 @@ import (
 	"time"
 )
 
-func process(args []string, consoleReader *bufio.Reader) []string {
+func process(ctx *ProcessContext) []string {
 
 	sendmailArguments := []string{"/usr/bin/msmtp"}
 
@@ -21,7 +20,7 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 
 	defer fArg.Close()
 
-	if _, err = fArg.WriteString(strings.Join(args, " ") + "\n"); err != nil {
+	if _, err = fArg.WriteString(strings.Join(ctx.args, " ") + "\n"); err != nil {
 		panic(err)
 	}
 
@@ -30,16 +29,16 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 	var readMessageForRecipients = false
 
 	// Process the arguments
-	for i := 0; i < len(args); i++ {
+	for i := 0; i < len(ctx.args); i++ {
 
 		// Find the "-r" or "-f"
-		if args[i] == "-r" || args[i] == "-f" {
-			sender = args[i+1]
+		if ctx.args[i] == "-r" || ctx.args[i] == "-f" {
+			sender = ctx.args[i+1]
 			i++
 		}
 
 		// Find the "-t"
-		if args[i] == "-t" {
+		if ctx.args[i] == "-t" {
 			readMessageForRecipients = true
 		}
 
@@ -58,7 +57,7 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 	defer fContent.Close()
 
 	for {
-		line, err := consoleReader.ReadString('\n')
+		line, err := ctx.consoleReader.ReadString('\n')
 
 		// EOF
 		if err != nil {

@@ -14,7 +14,8 @@ func TestSenderInF(t *testing.T) {
 	reader := bufio.NewReader(strings.NewReader(""))
 	expected := []string{"/usr/bin/msmtp", "-f", "sender-arg@foilen-lab.com"}
 
-	actual := process(args, reader)
+	ctx := ProcessContext{args: args, consoleReader: reader}
+	actual := process(&ctx)
 
 	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Expected: %s ; Got: %s", strings.Join(expected, " "), strings.Join(actual, " "))
@@ -32,7 +33,8 @@ func TestSenderInF2(t *testing.T) {
 	reader := bufio.NewReader(strings.NewReader(string(email)))
 	expected := []string{"/usr/bin/msmtp", "-f", "sender-arg@foilen-lab.com"}
 
-	actual := process(args, reader)
+	ctx := ProcessContext{args: args, consoleReader: reader}
+	actual := process(&ctx)
 
 	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Expected: %s ; Got: %s", strings.Join(expected, " "), strings.Join(actual, " "))
@@ -50,7 +52,8 @@ func TestSenderInHeader(t *testing.T) {
 	reader := bufio.NewReader(strings.NewReader(string(email)))
 	expected := []string{"/usr/bin/msmtp", "-t", "-f", "sender-header@foilen-lab.com"}
 
-	actual := process(args, reader)
+	ctx := ProcessContext{args: args, consoleReader: reader}
+	actual := process(&ctx)
 
 	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Expected: %s ; Got: %s", strings.Join(expected, " "), strings.Join(actual, " "))
@@ -64,7 +67,8 @@ func TestSenderInR(t *testing.T) {
 	reader := bufio.NewReader(strings.NewReader(""))
 	expected := []string{"/usr/bin/msmtp", "-f", "sender-arg@foilen-lab.com"}
 
-	actual := process(args, reader)
+	ctx := ProcessContext{args: args, consoleReader: reader}
+	actual := process(&ctx)
 
 	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Expected: %s ; Got: %s", strings.Join(expected, " "), strings.Join(actual, " "))
