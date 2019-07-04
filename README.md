@@ -15,18 +15,21 @@ The "from" email can be defined in multiple places. The latest defined will be u
 
 ## Compile
 
-`./gradlew goClean goBuild goTest` 
+`./create-local-release.sh`
 
-The file is then in `.gogradle/sendmail-to-msmtp-linux-amd64`
+The file is then in `build/bin/sendmail`
 
 ## Execute
 
 To execute:
-`./.gogradle/sendmail-to-msmtp-linux-amd64`
+`./build/bin/sendmail`
 
 # Create release
 
 `./create-public-release.sh`
+
+That will show the latest created version. Then, you can choose one and execute:
+`./create-public-release.sh X.X.X`
 
 # Use with debian
 
