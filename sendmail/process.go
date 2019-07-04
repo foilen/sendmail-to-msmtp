@@ -28,7 +28,8 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 		panic(err)
 	}
 
-	var sender string = "noname@nohost"
+	// TODO Get the default from the config file
+	var sender = "noname@nohost"
 
 	// Process the arguments
 	for i := 0; i < len(args); i++ {
