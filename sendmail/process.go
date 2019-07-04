@@ -24,12 +24,24 @@ func process(ctx *ProcessContext) []string {
 		panic(err)
 	}
 
-	// TODO Get the default from the config file
+	// TODO Get the default sender from the config file
 	var sender = "noname@nohost"
 	var readMessageForRecipients = false
+	recipients := []string{}
 
 	// Process the arguments
+	var endOfOptions = false
 	for i := 0; i < len(ctx.args); i++ {
+
+		// Check if no more an option
+		if ctx.args[i][0] != '-' {
+			endOfOptions = true
+		}
+
+		// Find the recipients
+		if endOfOptions {
+			recipients = append(recipients, ctx.args[i])
+		}
 
 		// Find the "-r" or "-f"
 		if ctx.args[i] == "-r" || ctx.args[i] == "-f" {
@@ -78,13 +90,16 @@ func process(ctx *ProcessContext) []string {
 		}
 	}
 
-	// Set the sender
+	// Set the sendmail arguments
 	if readMessageForRecipients {
 		sendmailArguments = append(sendmailArguments, "-t")
 	}
 	sendmailArguments = append(sendmailArguments, "-f", sender)
 
-	// TODO Get the addresses at the end
+	if len(recipients) > 0 {
+		sendmailArguments = append(sendmailArguments, "--")
+		sendmailArguments = append(sendmailArguments, recipients...)
+	}
 
 	return sendmailArguments
 

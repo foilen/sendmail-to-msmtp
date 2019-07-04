@@ -10,9 +10,9 @@ import (
 
 func TestSenderInF(t *testing.T) {
 
-	args := []string{"-f", "sender-arg@foilen-lab.com"}
+	args := []string{"-f", "sender-arg@foilen-lab.com", "d1@foilen-lab.com", "d2@foilen-lab.com"}
 	reader := bufio.NewReader(strings.NewReader(""))
-	expected := []string{"/usr/bin/msmtp", "-f", "sender-arg@foilen-lab.com"}
+	expected := []string{"/usr/bin/msmtp", "-f", "sender-arg@foilen-lab.com", "--", "d1@foilen-lab.com", "d2@foilen-lab.com"}
 
 	ctx := ProcessContext{args: args, consoleReader: reader}
 	actual := process(&ctx)
