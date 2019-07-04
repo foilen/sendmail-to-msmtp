@@ -39,7 +39,7 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 			i++
 		}
 
-		// TODO + Find the "-F" for full name of the sender
+		// TODO Find the "-t"
 
 	}
 
@@ -64,6 +64,15 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 			break
 		}
 
+		// Sanitize
+		line = strings.TrimSpace(line)
+
+		// Find the "From: "
+		fmt.Println(line)
+		if strings.HasPrefix(line, "From: ") {
+			sender = line[6:]
+		}
+
 		// Write to file
 		if _, err = fContent.WriteString(line); err != nil {
 			panic(err)
@@ -73,7 +82,7 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 	// Set the sender
 	sendmailArguments = append(sendmailArguments, "-f", sender)
 
-	// TODO + Get the addresses at the end
+	// TODO Get the addresses at the end
 
 	fmt.Println(sendmailArguments)
 	return sendmailArguments

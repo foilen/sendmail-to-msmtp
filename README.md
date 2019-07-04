@@ -9,7 +9,7 @@ The "from" email can be defined in multiple places. The latest defined will be u
 - *TODO* In the */etc/sendmail-to-msmtp.json* configuration file
 - In the "-r" argument
 - In the "-f" argument
-- *TODO* In the "From: " header
+- In the "From: " header
 
 # Local Usage
 
