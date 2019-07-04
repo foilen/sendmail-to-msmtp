@@ -1,11 +1,4 @@
-Arguments:
--t -i -r admin@foilen.com
-
-
 https://linux.die.net/man/8/sendmail.sendmail
 
-
--t -> -t
-	Read message for recipients. To:, Cc:, and Bcc: lines will be scanned for recipient addresses. The Bcc: line will be deleted before transmission.
 
 addresses ->  -- addresses

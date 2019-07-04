@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"math/rand"
 	"os"
 	"strconv"
@@ -11,8 +10,6 @@ import (
 )
 
 func process(args []string, consoleReader *bufio.Reader) []string {
-
-	fmt.Println(args)
 
 	sendmailArguments := []string{"/usr/bin/msmtp"}
 
@@ -30,6 +27,7 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 
 	// TODO Get the default from the config file
 	var sender = "noname@nohost"
+	var readMessageForRecipients = false
 
 	// Process the arguments
 	for i := 0; i < len(args); i++ {
@@ -40,7 +38,10 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 			i++
 		}
 
-		// TODO Find the "-t"
+		// Find the "-t"
+		if args[i] == "-t" {
+			readMessageForRecipients = true
+		}
 
 	}
 
@@ -49,7 +50,6 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 	tStr := strconv.FormatInt(t.Unix(), 10)
 	rStr := strconv.FormatInt(rand.Int63(), 10)
 	contentFileName := "/tmp/sendmail-content-" + tStr + rStr + ".txt"
-	fmt.Println(contentFileName)
 	fContent, err := os.OpenFile(contentFileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	if err != nil {
 		panic(err)
@@ -69,7 +69,6 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 		line = strings.TrimSpace(line)
 
 		// Find the "From: "
-		fmt.Println(line)
 		if strings.HasPrefix(line, "From: ") {
 			sender = line[6:]
 		}
@@ -81,11 +80,13 @@ func process(args []string, consoleReader *bufio.Reader) []string {
 	}
 
 	// Set the sender
+	if readMessageForRecipients {
+		sendmailArguments = append(sendmailArguments, "-t")
+	}
 	sendmailArguments = append(sendmailArguments, "-f", sender)
 
 	// TODO Get the addresses at the end
 
-	fmt.Println(sendmailArguments)
 	return sendmailArguments
 
 }

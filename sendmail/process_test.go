@@ -48,7 +48,7 @@ func TestSenderInHeader(t *testing.T) {
 		panic(err)
 	}
 	reader := bufio.NewReader(strings.NewReader(string(email)))
-	expected := []string{"/usr/bin/msmtp", "-f", "sender-header@foilen-lab.com"}
+	expected := []string{"/usr/bin/msmtp", "-t", "-f", "sender-header@foilen-lab.com"}
 
 	actual := process(args, reader)
 
