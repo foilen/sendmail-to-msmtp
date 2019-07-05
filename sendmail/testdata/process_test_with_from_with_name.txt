@@ -1,0 +1,5 @@
+To: destination@foilen-lab.com
+Subject: [From header] This is a test
+From: The Sender <sender-header@foilen-lab.com>
+
+This is the body of the test message

@@ -89,7 +89,16 @@ func process(ctx *ProcessContext) []string {
 
 		// Find the "From: "
 		if strings.HasPrefix(line, "From: ") {
-			sender = line[6:]
+
+			// If in the form "From: The Sender <sender-header@foilen-lab.com>"
+			lBracket := strings.Index(line, "<")
+			rBracket := strings.Index(line, ">")
+			if lBracket > 0 && rBracket > lBracket {
+				sender = line[lBracket+1 : rBracket]
+			} else {
+				// Else in the form "From: sender-header@foilen-lab.com"
+				sender = line[6:]
+			}
 		}
 
 		// Write to file
