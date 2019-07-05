@@ -6,7 +6,7 @@ This is a bridge from sendmail to msmtp. The goal is to support all the differen
 
 The "from" email can be defined in multiple places. The latest defined will be used.
 
-- *TODO* In the */etc/sendmail-to-msmtp.json* configuration file
+- In the */etc/sendmail-to-msmtp.json* configuration file
 - In the "-r" argument
 - In the "-f" argument
 - In the "From: " header

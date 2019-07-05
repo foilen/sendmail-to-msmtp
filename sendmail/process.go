@@ -24,10 +24,18 @@ func process(ctx *ProcessContext) []string {
 		panic(err)
 	}
 
-	// TODO Get the default sender from the config file
-	var sender = "noname@nohost"
+	var sender = ""
 	var readMessageForRecipients = false
 	recipients := []string{}
+
+	// Get the default sender from the config file
+	if ctx.configurationPath != "" {
+		configuration, err := getSendmailToMsmtpConfiguration(ctx.configurationPath)
+		if err != nil {
+			panic(err)
+		}
+		sender = configuration.DefaultFrom
+	}
 
 	// Process the arguments
 	var endOfOptions = false
@@ -94,7 +102,9 @@ func process(ctx *ProcessContext) []string {
 	if readMessageForRecipients {
 		sendmailArguments = append(sendmailArguments, "-t")
 	}
-	sendmailArguments = append(sendmailArguments, "-f", sender)
+	if sender != "" {
+		sendmailArguments = append(sendmailArguments, "-f", sender)
+	}
 
 	if len(recipients) > 0 {
 		sendmailArguments = append(sendmailArguments, "--")

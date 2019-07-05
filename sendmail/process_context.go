@@ -6,4 +6,6 @@ import "bufio"
 type ProcessContext struct {
 	args          []string
 	consoleReader *bufio.Reader
+
+	configurationPath string
 }
