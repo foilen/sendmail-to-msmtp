@@ -1,29 +1,16 @@
 package main
 
 import (
-	"math/rand"
+	"io/ioutil"
 	"os"
-	"strconv"
 	"strings"
-	"time"
 )
 
 func process(ctx *ProcessContext) []string {
 
 	sendmailArguments := []string{"/usr/bin/msmtp"}
 
-	// Log arguments
-	fArg, err := os.OpenFile("/tmp/sendmail-arguments.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-	if err != nil {
-		panic(err)
-	}
-
-	defer fArg.Close()
-
-	if _, err = fArg.WriteString(strings.Join(ctx.args, " ") + "\n"); err != nil {
-		panic(err)
-	}
-
+	// Initial values
 	var sender = ""
 	var readMessageForRecipients = false
 	recipients := []string{}
@@ -64,12 +51,15 @@ func process(ctx *ProcessContext) []string {
 
 	}
 
-	// Log email
-	t := time.Now()
-	tStr := strconv.FormatInt(t.Unix(), 10)
-	rStr := strconv.FormatInt(rand.Int63(), 10)
-	contentFileName := "/tmp/sendmail-content-" + tStr + rStr + ".txt"
-	fContent, err := os.OpenFile(contentFileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	// Copy email in temporary file
+	if ctx.sendmailFilePath == "" {
+		tmpFile, err := ioutil.TempFile("/tmp", "")
+		if err != nil {
+			panic(err)
+		}
+		ctx.sendmailFilePath = tmpFile.Name()
+	}
+	fContent, err := os.OpenFile(ctx.sendmailFilePath, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	if err != nil {
 		panic(err)
 	}
@@ -102,6 +92,7 @@ func process(ctx *ProcessContext) []string {
 		}
 
 		// Write to file
+		line = line + "\n"
 		if _, err = fContent.WriteString(line); err != nil {
 			panic(err)
 		}
