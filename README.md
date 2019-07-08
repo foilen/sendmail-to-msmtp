@@ -39,3 +39,12 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D
 sudo apt update
 sudo apt install msmtp sendmail-to-msmtp
 ```
+
+# Configuration file
+
+If you want to set a default email address for the "from" when no other is specified, you can create the */etc/sendmail-to-msmtp.json* configuration file with the following content:
+```
+{
+  "defaultFrom" : "default@foilen-lab.com"
+}
+```
