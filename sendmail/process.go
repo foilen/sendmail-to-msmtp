@@ -75,7 +75,7 @@ func process(ctx *ProcessContext) []string {
 		}
 
 		// Sanitize
-		line = strings.TrimSpace(line)
+		line = strings.Trim(line, "\n\t")
 
 		// Find the "From: "
 		if strings.HasPrefix(line, "From: ") {
