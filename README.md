@@ -48,3 +48,11 @@ If you want to set a default email address for the "from" when no other is speci
   "defaultFrom" : "default@foilen-lab.com"
 }
 ```
+
+For debugging purpose, you can dump all the raw emails in a directory. Please note that there is no cleanup of these files; you need to clean them up yourself.
+```
+{
+  "defaultFrom" : "default@foilen-lab.com",
+  "emailDumpDirectory" : "/tmp/rawemails"
+}
+```

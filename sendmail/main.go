@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"io/ioutil"
 	"os"
 	"os/exec"
 )
@@ -16,6 +17,21 @@ func main() {
 
 	// Get the command and its arguments
 	sendmailCommandAndArguments := process(&ctx)
+
+	//  Copy the sendmail file in the dump if needed
+	if ctx.emailDumpFilePrefix != "" {
+
+		input, err := ioutil.ReadFile(ctx.sendmailFilePath)
+		if err != nil {
+			panic(err)
+		}
+
+		err = ioutil.WriteFile(ctx.emailDumpFilePrefix+"-sendmail.eml", input, 0600)
+		if err != nil {
+			panic(err)
+		}
+
+	}
 
 	// Run the msmtp command
 	cmd := exec.Command(sendmailCommandAndArguments[0], sendmailCommandAndArguments[1:]...)

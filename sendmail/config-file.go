@@ -7,7 +7,8 @@ import (
 
 // SendmailToMsmtpConfiguration is the json configuration file
 type SendmailToMsmtpConfiguration struct {
-	DefaultFrom string
+	DefaultFrom        string
+	EmailDumpDirectory string
 }
 
 func getSendmailToMsmtpConfiguration(path string) (*SendmailToMsmtpConfiguration, error) {

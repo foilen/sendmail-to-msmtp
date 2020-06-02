@@ -3,7 +3,9 @@ package main
 import (
 	"io/ioutil"
 	"os"
+	"strconv"
 	"strings"
+	"time"
 )
 
 func process(ctx *ProcessContext) []string {
@@ -22,6 +24,9 @@ func process(ctx *ProcessContext) []string {
 			panic(err)
 		}
 		sender = configuration.DefaultFrom
+		if configuration.EmailDumpDirectory != "" {
+			ctx.emailDumpFilePrefix = configuration.EmailDumpDirectory + "/" + strconv.Itoa(int(time.Now().UnixNano()))
+		}
 	}
 
 	// Process the arguments
@@ -66,12 +71,29 @@ func process(ctx *ProcessContext) []string {
 
 	defer fContent.Close()
 
+	// Open raw file if requested
+	var fRawDump *os.File
+	if ctx.emailDumpFilePrefix != "" {
+		fRawDump, err = os.OpenFile(ctx.emailDumpFilePrefix+"-raw.eml", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		if err != nil {
+			panic(err)
+		}
+		defer fRawDump.Close()
+	}
+
 	for {
 		line, err := ctx.consoleReader.ReadString('\n')
 
 		// EOF
 		if err != nil {
 			break
+		}
+
+		// Put in raw dump file if needed
+		if fRawDump != nil {
+			if _, err = fRawDump.WriteString(line); err != nil {
+				panic(err)
+			}
 		}
 
 		// Sanitize

@@ -10,4 +10,6 @@ type ProcessContext struct {
 	configurationPath string
 
 	sendmailFilePath string
+
+	emailDumpFilePrefix string
 }
