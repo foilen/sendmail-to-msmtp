@@ -1,0 +1,22 @@
+To: "Me Me" <recipient@foilen-lab.com>
+Subject: Re: TEST [#00000]
+Content-Type: multipart/alternative;
+	boundary="=_f34d6dd4b71320bbc77e2c60cdbb6d37"
+MIME-Version: 1.0
+From: "Foilen Tickets" <sender@foilen-lab.com>
+Date: Wed, 24 Jul 2019 00:06:52 +0000
+Message-ID: <AAAAA-AAAA-AAAAAAA/AAAAA-sender@foilen-lab.com>
+X-Mailer: osTicket Mailer
+Return-Path: sender@foilen-lab.com
+
+--=_f34d6dd4b71320bbc77e2c60cdbb6d37
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=utf-8
+
+VGVzdAo=
+--=_f34d6dd4b71320bbc77e2c60cdbb6d37
+Content-Transfer-Encoding: base64
+Content-Type: text/html; charset=utf-8
+
+PGh0bWw+PGJvZHk+VGVzdDwvYm9keT48L2h0bWw+Cg==
+--=_f34d6dd4b71320bbc77e2c60cdbb6d37--

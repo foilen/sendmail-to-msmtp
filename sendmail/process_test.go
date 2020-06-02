@@ -155,3 +155,24 @@ func TestMultipart(t *testing.T) {
 	AssertFilesContent(t, "testdata/process_test_multipart.txt", ctx.sendmailFilePath)
 
 }
+
+func TestMultipartTab(t *testing.T) {
+
+	args := []string{"-t", "-i", "-f", "sender@foilen-lab.com"}
+	email, err := ioutil.ReadFile("testdata/process_test_multipart-tab.txt")
+	if err != nil {
+		panic(err)
+	}
+	reader := bufio.NewReader(strings.NewReader(string(email)))
+	expected := []string{"/usr/bin/msmtp", "-t", "-f", "sender@foilen-lab.com"}
+
+	ctx := ProcessContext{args: args, consoleReader: reader}
+	actual := process(&ctx)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Expected: %s ; Got: %s", strings.Join(expected, " "), strings.Join(actual, " "))
+	}
+
+	AssertFilesContent(t, "testdata/process_test_multipart-tab.txt", ctx.sendmailFilePath)
+
+}
