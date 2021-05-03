@@ -33,11 +33,11 @@ That will show the latest created version. Then, you can choose one and execute:
 
 # Use with debian
 
+Get the version you want from https://deploy.foilen.com/sendmail-to-msmtp/ .
+
 ```bash
-echo "deb https://dl.bintray.com/foilen/debian stable main" | sudo tee /etc/apt/sources.list.d/foilen.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-sudo apt update
-sudo apt install msmtp sendmail-to-msmtp
+wget https://deploy.foilen.com/sendmail-to-msmtp/sendmail-to-msmtp_X.X.X_amd64.deb
+sudo dpkg -i sendmail-to-msmtp_X.X.X_amd64.deb
 ```
 
 # Configuration file
