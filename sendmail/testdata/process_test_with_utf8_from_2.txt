@@ -1,0 +1,56 @@
+To: "Destination destination@foilen-lab.com" <destination@foilen-lab.com>
+Subject: =?UTF-8?Q?New_booking_|_Nouvelle_r=C3=A9servation?=
+Date: Mon, 3 May 2021 13:41:21 +0000
+From: =?UTF-8?Q?Booking_system_=7C_Syst=C3=A8me_de_r=C3=A9servatio?=
+ =?UTF-8?Q?n?=
+ =?UTF-8?Q?n?= <sender-header@foilen-lab.com>
+Message-ID: <UzEXkGjuBIbCz60pPuzhcE@www.foilen-lab.com>
+X-Mailer: PHPMailer 6.3.0 (https://github.com/PHPMailer/PHPMailer)
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">                                     <!--  dir="ltr" -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body style="Margin:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;min-width:100%;"
+leftmargin="0" >
+<div class="wrapper"
+style="table-layout:fixed;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;Margin:0;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;"
+dir="ltr" >
+    <p style="Margin:0;font-size:14px;Margin-bottom:10px;font-family:Helvetica, Roboto, Arial,
+sans-serif;line-height:150%;" ><p>Your reservation Calendrier Principal for: 4 mai 2021 10:30 - 4
+mai 2021 11:00 is processing now! We will call you soon to confirmation . <br /><br /><div
+style="text-align:left;word-wrap: break-word;">
+  <strong>First Name</strong>: <span class="fieldvalue">Destination</span><br/>
+  <strong>Last Name</strong>: <span class="fieldvalue"><a
+href="mailto:destination@foilen-lab.com">destination@foilen-lab.com</a></span><br/>
+  <strong>Email</strong>: <span class="fieldvalue"><a
+href="mailto:destination@foilen-lab.com">destination@foilen-lab.com</a></span><br/>
+  <strong>Phone</strong>: <span class="fieldvalue">5555555555</span><br/>
+  <strong>Details</strong>: <span class="fieldvalue"></span><br/>
+</div><br /><br />Thank you, Super Class<br /><a
+href="https://www.foilen-lab.com">https://www.foilen-lab.com</a></p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p><strong>Français</strong></p>
+<p>Votre Réservation Calendrier Principal for: 4 mai 2021 10:30 - 4 mai 2021 11:00 est
+présentement en traitement. Nous vous contacterons sous peu afin de confirmer. <br /><br /><div
+style="text-align:left;word-wrap: break-word;">
+  <strong>First Name</strong>: <span class="fieldvalue">Destination</span><br/>
+  <strong>Last Name</strong>: <span class="fieldvalue"><a
+href="mailto:destination@foilen-lab.com">destination@foilen-lab.com</a></span><br/>
+  <strong>Email</strong>: <span class="fieldvalue"><a
+href="mailto:destination@foilen-lab.com">destination@foilen-lab.com</a></span><br/>
+  <strong>Phone</strong>: <span class="fieldvalue">5555555555</span><br/>
+  <strong>Details</strong>: <span class="fieldvalue"></span><br/>
+</div><br /><br />Merci, Super Class<br /><a
+href="https://www.foilen-lab.com">https://www.foilen-lab.com</a></p></p>    
+</div>   
+</body>
+

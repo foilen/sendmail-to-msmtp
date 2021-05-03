@@ -121,6 +121,48 @@ func TestSenderInHeaderWithName(t *testing.T) {
 
 }
 
+func TestSenderInHeaderWithUtf8Name(t *testing.T) {
+
+	args := []string{"-t"}
+	email, err := ioutil.ReadFile("testdata/process_test_with_utf8_from.txt")
+	if err != nil {
+		panic(err)
+	}
+	reader := bufio.NewReader(strings.NewReader(string(email)))
+	expected := []string{"/usr/bin/msmtp", "-t", "-f", "sender-header@foilen-lab.com"}
+
+	ctx := ProcessContext{args: args, consoleReader: reader}
+	actual := process(&ctx)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Expected: %s ; Got: %s", strings.Join(expected, " "), strings.Join(actual, " "))
+	}
+
+	AssertFilesContent(t, "testdata/process_test_with_utf8_from.txt", ctx.sendmailFilePath)
+
+}
+
+func TestSenderInHeaderWithUtf8Name2(t *testing.T) {
+
+	args := []string{"-t"}
+	email, err := ioutil.ReadFile("testdata/process_test_with_utf8_from_2.txt")
+	if err != nil {
+		panic(err)
+	}
+	reader := bufio.NewReader(strings.NewReader(string(email)))
+	expected := []string{"/usr/bin/msmtp", "-t", "-f", "sender-header@foilen-lab.com"}
+
+	ctx := ProcessContext{args: args, consoleReader: reader}
+	actual := process(&ctx)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Expected: %s ; Got: %s", strings.Join(expected, " "), strings.Join(actual, " "))
+	}
+
+	AssertFilesContent(t, "testdata/process_test_with_utf8_from_2.txt", ctx.sendmailFilePath)
+
+}
+
 func TestSenderInR(t *testing.T) {
 
 	args := []string{"-r", "sender-arg@foilen-lab.com"}

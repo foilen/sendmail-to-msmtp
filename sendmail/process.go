@@ -81,6 +81,8 @@ func process(ctx *ProcessContext) []string {
 		defer fRawDump.Close()
 	}
 
+	// Read the headers
+	var headerLines []string
 	for {
 		line, err := ctx.consoleReader.ReadString('\n')
 
@@ -99,8 +101,39 @@ func process(ctx *ProcessContext) []string {
 		// Sanitize
 		line = strings.Trim(line, "\n\r")
 
-		// Find the "From: "
+		// Add to list
+		if len(line) != 0 {
+			headerLines = append(headerLines, line)
+		}
+
+		// Write to file
+		line = line + "\n"
+		if _, err = fContent.WriteString(line); err != nil {
+			panic(err)
+		}
+
+		// Stop if no more the headers
+		if len(line) == 1 {
+			break
+		}
+	}
+
+	// Find the "From: "
+	for i := 0; i < len(headerLines); i++ {
+
+		var line = headerLines[i]
 		if strings.HasPrefix(line, "From: ") {
+
+			// Append all next lines that are starting with a space
+			for j := i + 1; j < len(headerLines); j++ {
+				var nextLine = headerLines[j]
+				if strings.HasPrefix(nextLine, " ") || strings.HasPrefix(nextLine, "\t") {
+					i++
+					line += nextLine
+				} else {
+					break
+				}
+			}
 
 			// If in the form "From: The Sender <sender-header@foilen-lab.com>"
 			lBracket := strings.Index(line, "<")
@@ -112,6 +145,26 @@ func process(ctx *ProcessContext) []string {
 				sender = line[6:]
 			}
 		}
+	}
+
+	// Process the body
+	for {
+		line, err := ctx.consoleReader.ReadString('\n')
+
+		// EOF
+		if err != nil {
+			break
+		}
+
+		// Put in raw dump file if needed
+		if fRawDump != nil {
+			if _, err = fRawDump.WriteString(line); err != nil {
+				panic(err)
+			}
+		}
+
+		// Sanitize
+		line = strings.Trim(line, "\n\r")
 
 		// Write to file
 		line = line + "\n"
