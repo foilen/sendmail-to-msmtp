@@ -14,7 +14,7 @@
       {
         packages.default = pkgs.buildGoModule {
           pname = "sendmail-to-msmtp";
-          version = "1.1.1";
+          version = "1.1.2";
 
           src = ./.;
 

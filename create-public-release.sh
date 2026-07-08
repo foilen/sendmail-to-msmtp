@@ -24,7 +24,7 @@ export VERSION=$1
 ./step-compile.sh
 ./step-test.sh
 ./step-debian-create.sh
-./step-debian-upload.sh
+./step-flake-version-update.sh
 ./step-git-tag.sh
 
 echo ----[ Operation completed successfully ]==----
