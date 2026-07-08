@@ -9,10 +9,14 @@ import (
 
 func main() {
 
-	//  In /etc/sendmail-to-msmtp.json if present
+	//  In /etc/sendmail-to-msmtp.json if present (or SENDMAIL_TO_MSMTP_CONFIG if set)
 	ctx := ProcessContext{args: os.Args[1:], consoleReader: bufio.NewReader(os.Stdin)}
-	if _, err := os.Stat("/etc/sendmail-to-msmtp.json"); err == nil {
-		ctx.configurationPath = "/etc/sendmail-to-msmtp.json"
+	configurationPath := os.Getenv("SENDMAIL_TO_MSMTP_CONFIG")
+	if configurationPath == "" {
+		configurationPath = "/etc/sendmail-to-msmtp.json"
+	}
+	if _, err := os.Stat(configurationPath); err == nil {
+		ctx.configurationPath = configurationPath
 	}
 
 	// Get the command and its arguments

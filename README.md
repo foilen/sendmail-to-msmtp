@@ -56,3 +56,8 @@ For debugging purpose, you can dump all the raw emails in a directory. Please no
   "emailDumpDirectory" : "/tmp/rawemails"
 }
 ```
+
+# Environment variables
+
+- `MSMTP_PATH`: Path to the `msmtp` binary to invoke. Defaults to `/usr/bin/msmtp`.
+- `SENDMAIL_TO_MSMTP_CONFIG`: Path to the configuration file. Defaults to `/etc/sendmail-to-msmtp.json`. The file is only used if it exists at that path.

@@ -10,7 +10,11 @@ import (
 
 func process(ctx *ProcessContext) []string {
 
-	sendmailArguments := []string{"/usr/bin/msmtp"}
+	msmtpPath := os.Getenv("MSMTP_PATH")
+	if msmtpPath == "" {
+		msmtpPath = "/usr/bin/msmtp"
+	}
+	sendmailArguments := []string{msmtpPath}
 
 	// Initial values
 	var sender = ""
