@@ -14,17 +14,13 @@
       {
         packages.default = pkgs.buildGoModule {
           pname = "sendmail-to-msmtp";
-          version = "1.1.2";
+          version = "1.1.3";
 
           src = ./.;
 
           subPackages = [ "sendmail" ];
 
           vendorHash = null;
-
-          postInstall = ''
-            mv $out/bin/sendmail $out/bin/sendmail-to-msmtp
-          '';
 
           meta = with pkgs.lib; {
             description = "A bridge from sendmail to msmtp";
