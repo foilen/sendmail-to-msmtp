@@ -177,6 +177,20 @@ func TestSenderInR(t *testing.T) {
 	}
 }
 
+func TestMsmtpPathOverride(t *testing.T) {
+
+	args := []string{"-r", "sender-arg@foilen-lab.com"}
+	reader := bufio.NewReader(strings.NewReader(""))
+	expected := []string{"/opt/msmtp/bin/msmtp", "-f", "sender-arg@foilen-lab.com"}
+
+	ctx := ProcessContext{args: args, consoleReader: reader, msmtpPath: "/opt/msmtp/bin/msmtp"}
+	actual := process(&ctx)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Expected: %s ; Got: %s", strings.Join(expected, " "), strings.Join(actual, " "))
+	}
+}
+
 func TestMultipart(t *testing.T) {
 
 	args := []string{"-t", "-i", "-f", "sender@foilen-lab.com"}

@@ -8,6 +8,7 @@ type ProcessContext struct {
 	consoleReader *bufio.Reader
 
 	configurationPath string
+	msmtpPath         string
 
 	sendmailFilePath string
 

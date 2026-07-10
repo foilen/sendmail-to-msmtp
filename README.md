@@ -56,3 +56,10 @@ For debugging purpose, you can dump all the raw emails in a directory. Please no
   "emailDumpDirectory" : "/tmp/rawemails"
 }
 ```
+
+# Environment variables
+
+By default, the configuration file is read from */etc/sendmail-to-msmtp.json* and the `msmtp` binary is invoked at */usr/bin/msmtp*. Both can be overridden with environment variables:
+
+- `SENDMAIL_TO_MSMTP_CONFIG_PATH`: path to a different configuration file (replaces */etc/sendmail-to-msmtp.json*)
+- `SENDMAIL_TO_MSMTP_MSMTP_PATH`: path to a different `msmtp` binary (replaces */usr/bin/msmtp*)
