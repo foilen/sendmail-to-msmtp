@@ -15,6 +15,9 @@ func process(ctx *ProcessContext) []string {
 		msmtpPath = ctx.msmtpPath
 	}
 	sendmailArguments := []string{msmtpPath}
+	if ctx.msmtpConfigPath != "" {
+		sendmailArguments = append(sendmailArguments, "-C", ctx.msmtpConfigPath)
+	}
 
 	// Initial values
 	var sender = ""

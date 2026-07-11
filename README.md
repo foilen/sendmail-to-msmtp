@@ -63,3 +63,4 @@ By default, the configuration file is read from */etc/sendmail-to-msmtp.json* an
 
 - `SENDMAIL_TO_MSMTP_CONFIG_PATH`: path to a different configuration file (replaces */etc/sendmail-to-msmtp.json*)
 - `SENDMAIL_TO_MSMTP_MSMTP_PATH`: path to a different `msmtp` binary (replaces */usr/bin/msmtp*)
+- `SENDMAIL_TO_MSMTP_MSMTPRC_PATH`: path to a `msmtp` configuration file to use (passed to `msmtp` via `-C`); if not set, `msmtp` uses its own default

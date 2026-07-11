@@ -9,6 +9,7 @@ type ProcessContext struct {
 
 	configurationPath string
 	msmtpPath         string
+	msmtpConfigPath   string
 
 	sendmailFilePath string
 

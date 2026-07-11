@@ -22,15 +22,23 @@ The release scripts are composed of the `step-*.sh` scripts, each runnable stand
 
 Single Go module (`github.com/foilen/sendmail-to-msmtp`), single package `main` under `sendmail/`:
 
-- `main.go` — entry point. Detects `/etc/sendmail-to-msmtp.json` if present, calls `process()` to build the msmtp command, optionally copies the spooled email into a debug dump directory, then execs `msmtp` with the built args and the spooled file piped as stdin.
+- `main.go` — entry point. Detects `/etc/sendmail-to-msmtp.json` if present, calls `process()` to build the msmtp command, optionally copies the spooled email into a debug dump directory, then execs `msmtp` with the built args and the spooled file piped as stdin. The config path, `msmtp` binary path, and `msmtp` config path (`-C`) can each be overridden with an env var — see "Environment variables" below.
 - `process.go` — the core logic (`process(ctx *ProcessContext) []string`). Parses sendmail-style CLI args (`-r`/`-f` for sender, `-t` to read recipients from headers, trailing non-flag args as recipients), streams stdin to a temp file line-by-line, parses headers to extract `From:` (handling folded/multi-line headers and both `Name <addr>` and bare `addr` forms), and returns the full `msmtp` argv. All I/O and side effects go through `ProcessContext` rather than globals, which is what makes this function unit-testable.
-- `process_context.go` — `ProcessContext` struct: carries CLI args, the stdin reader, and mutable state (config path, spooled file path, dump file prefix) between `main.go` and `process.go`.
+- `process_context.go` — `ProcessContext` struct: carries CLI args, the stdin reader, and mutable state (config path, msmtp binary/config path overrides, spooled file path, dump file prefix) between `main.go` and `process.go`.
 - `config-file.go` — reads/unmarshals the optional JSON config file (`DefaultFrom`, `EmailDumpDirectory`).
 - `process_test.go` + `sendmail/testdata/*` — table-driven-style tests feeding raw `.txt`/`.json` fixtures through `process()` and asserting the resulting msmtp argv and spooled file contents.
 
 ### "From" precedence
 
 The sender address is resolved in increasing priority (later overrides earlier), per README: config file `defaultFrom` → `-r` arg → `-f` arg → `From:` header. This ordering is implemented directly in the arg-parsing loop and header-parsing loop in `process.go` — preserve it when touching that logic.
+
+### Environment variables
+
+`main.go` reads these to override defaults, mirroring one convention (`SENDMAIL_TO_MSMTP_*`):
+
+- `SENDMAIL_TO_MSMTP_CONFIG_PATH` — overrides `/etc/sendmail-to-msmtp.json`
+- `SENDMAIL_TO_MSMTP_MSMTP_PATH` — overrides `/usr/bin/msmtp`
+- `SENDMAIL_TO_MSMTP_MSMTPRC_PATH` — if set, passed to `msmtp` as `-C <path>` (`ctx.msmtpConfigPath` in `process.go`)
 
 ### Debug email dump
 

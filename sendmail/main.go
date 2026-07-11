@@ -23,6 +23,9 @@ func main() {
 	// The msmtp binary path can be overridden with SENDMAIL_TO_MSMTP_MSMTP_PATH
 	ctx.msmtpPath = os.Getenv("SENDMAIL_TO_MSMTP_MSMTP_PATH")
 
+	// The msmtp configuration file path can be overridden with SENDMAIL_TO_MSMTP_MSMTPRC_PATH
+	ctx.msmtpConfigPath = os.Getenv("SENDMAIL_TO_MSMTP_MSMTPRC_PATH")
+
 	// Always show the values that will actually be used
 	resolvedMsmtpPath := ctx.msmtpPath
 	if resolvedMsmtpPath == "" {
@@ -30,6 +33,9 @@ func main() {
 	}
 	fmt.Fprintf(os.Stderr, "sendmail-to-msmtp: configuration file: %s (found: %t)\n", configurationPath, ctx.configurationPath != "")
 	fmt.Fprintf(os.Stderr, "sendmail-to-msmtp: msmtp binary: %s\n", resolvedMsmtpPath)
+	if ctx.msmtpConfigPath != "" {
+		fmt.Fprintf(os.Stderr, "sendmail-to-msmtp: msmtp configuration file: %s\n", ctx.msmtpConfigPath)
+	}
 
 	// Get the command and its arguments
 	sendmailCommandAndArguments := process(&ctx)
